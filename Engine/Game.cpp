@@ -24,7 +24,9 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	walls(Vec2(0,0),gfx.ScreenWidth,gfx.ScreenHeight),
+	ball(Vec2(20,20),Vec2(300,300))
 {
 }
 
@@ -38,9 +40,15 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	float dt = timer.Mark();
+	ball.update(dt);
+	if (ball.DoWallColision(walls)) 
+	{
+
+	}
 }
 
 void Game::ComposeFrame()
 {
-	gfx.PutPixel(200, 20, 200, 200, 200);
+	ball.Draw(gfx);
 }
